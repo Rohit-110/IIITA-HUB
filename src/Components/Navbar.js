@@ -39,6 +39,11 @@ export default function Navbar() {
         setShowNotifications(!showNotifications);
     };
 
+    const handleSignOut = () => {
+        // Implement your sign out functionality here
+        console.log("Signing out...");
+    };
+
     return (
         <header
             id="header"
@@ -80,6 +85,11 @@ export default function Navbar() {
                                 <img className="mt-2 w-8" src={scrolled ? noti : noti2} alt="noti" />
                             </span></Link>
                             <Notifications showNotifications={showNotifications}/>
+                        </li>
+                        <li className="nav-item ml-3">
+                            <button onClick={handleSignOut} className="nav-link btn btn-danger p-3 fs-5" style={{ textDecoration: 'none', color: '#ffffff' }}>
+                                Sign Out
+                            </button>
                         </li>
                     </ul>
                     <i className="bi bi-list mobile-nav-toggle"></i>

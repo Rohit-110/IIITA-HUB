@@ -12,7 +12,7 @@ export default function Home() {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-8">
-            <div className="mt-24 input-group">
+            <div className="mt-28 input-group">
               <input type="text" className="form-control rounded-start" placeholder="Search..." style={{ borderTopRightRadius: '0', borderBottomRightRadius: '0' }} />
               <button className="btn btn-outline-secondary rounded-end" type="button" style={{ borderTopLeftRadius: '0', borderBottomLeftRadius: '0' }}>Search</button>
             </div>
