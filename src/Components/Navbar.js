@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Link } from 'react-router-dom';
 import noti from '../noti.png';
 import noti2 from '../noti2.png';
 import Notifications from './Notifications';
-
+import Noti from '../Pages/Noti';
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
-
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 0);
@@ -62,10 +61,10 @@ export default function Navbar() {
                                 Contact Us
                             </Link>
                         </li>
-                        <li className="nav-item dropdown ml-4" onMouseEnter={toggleNotifications} onMouseLeave={toggleNotifications} onClick={<Notifications/>}>
-                            <span className="nav-link" style={{ cursor: 'pointer', color: scrolled ? '#000000' : '#ffffff' }}>
+                        <li className="nav-item dropdown ml-4" onMouseEnter={toggleNotifications} onMouseLeave={toggleNotifications}>
+                            <Link to="/notifications"><span className="nav-link" style={{ cursor: 'pointer', color: scrolled ? '#000000' : '#ffffff' }}>
                                 <img className="mt-2 w-8" src={scrolled ? noti : noti2} alt="noti" />
-                            </span>
+                            </span></Link>
                             <Notifications showNotifications={showNotifications} className="mr-10" />
                         </li>
                     </ul>

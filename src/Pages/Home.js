@@ -30,7 +30,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section id="about" className="py-5">
+      <section id="about" className="py-5 ">
         <div className="container mt-5">
           <div className="row">
             <div className="col-lg-6">

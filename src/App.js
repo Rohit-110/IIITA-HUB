@@ -10,6 +10,7 @@ import Search from './Pages/Search';
 import Recruiters from './Pages/Recruiters';
 import Contact from './Pages/Contact';
 import Statistics from './Pages/Statistics';
+import Noti from './Pages/Noti';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [email, setEmail] = useState('')
@@ -26,6 +27,7 @@ function App() {
           <Route path="/companies" element={<Recruiters/>}/>
           <Route path="/statistics" element={<Statistics/>}/>
           <Route path="/contact" element={<Contact/>}/>
+          <Route path="/notifications" element={<Noti/>}/>
           <Route path="/test" element={<Test/>}/>
         </Routes>
       </BrowserRouter>
