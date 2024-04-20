@@ -1,26 +1,31 @@
-import React from 'react';
-import img7 from '../images/img7.png';
+import React, { useEffect } from 'react';
+import img7 from '../images/img7.jpeg';
 import Navbar from '../Components/Navbar';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 const profileData = {
     image: img7,
     name: "Jai Khanna",
     email: "iit2022005@iiita.ac.in",
     phoneNumber: "8360708882",
     skills: ["JavaScript", "React", "Node.js", "HTML", "CSS", "SQL"],
-    batch: "2026",
+    batch: 2026,
     degree: "BTech IT",
+    cgpa: 8.03,
     summary: "I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems."
 };
 
 const Profile = () => {
+    useEffect(()=>{
+        AOS.init({duration:1500})
+    })
     return (
         <div>
             <Navbar />
             <section className='bg-dark'>
                 <div className="container py-20">
                     <div className="row">
-                        <div className="col-lg-4">
+                        <div data-aos="fade-right" className="col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
                                     <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
@@ -33,8 +38,8 @@ const Profile = () => {
                             </div>
                         </div>
 
-                        <div className="col-lg-8">
-                            <div className="card mb-4">
+                        <div data-aos="fade-left" className="col-lg-8">
+                            <div className="card mb-10">
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-sm-3">
@@ -65,7 +70,7 @@ const Profile = () => {
                                     <hr />
                                     <div className="row">
                                         <div className="col-sm-3">
-                                            <p className="mb-0">Batch</p>
+                                            <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
                                             <p className="text-muted mb-0">{profileData.batch}</p>
@@ -74,22 +79,28 @@ const Profile = () => {
                                     <hr />
                                     <div className="row">
                                         <div className="col-sm-3">
-                                            <p className="mb-0">Degree</p>
+                                            <p className="mb-1">Degree</p>
                                         </div>
                                         <div className="col-sm-9">
                                             <p className="text-muted mb-0">{profileData.degree}</p>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="card mb-4">
-                                <div className="card-body">
+                                    <hr/>
                                     <div className="row">
                                         <div className="col-sm-3">
                                             <p className="mb-0">Skills</p>
                                         </div>
                                         <div className="col-sm-9">
                                             <p className="text-muted mb-0">{profileData.skills.join(', ')}</p> {/* Join the array elements */}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <p className="mb-0">CGPA</p>
+                                        </div>
+                                        <div className="col-sm-9">
+                                            <p className="text-muted mb-0">{profileData.cgpa}</p>
                                         </div>
                                     </div>
                                 </div>

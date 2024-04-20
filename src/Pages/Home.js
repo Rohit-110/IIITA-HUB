@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import { Link } from 'react-router-dom';
 import Footer from '../Components/Footer';
 import Scroll from '../Components/Scroll';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 export default function Home() {
   const scrollToAbout = () =>{
     const aboutSection = document.getElementById('about');
     aboutSection.scrollIntoView({ behavior:'smooth' });
   }
+  useEffect(()=>{
+    AOS.init({duration: 1500});
+  })
   return (
     <div className="main">
       <Scroll/>
       <Navbar />
       <header>
-        <div id="intro-example" className="p-5 text-center bg-image h-screen " style={{
+        <div id="intro" className="p-5 text-center bg-image h-screen " style={{
           backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url('https://www.iiita.ac.in/uploads/carousel/12288_o303.jpg')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat"
         }}>
-            <div className="d-flex justify-content-center align-items-center h-100">
+            <div data-aos="zoom-in" className="d-flex justify-content-center align-items-center h-100">
               <div className="text-white">
                 <h1 className="mb-3">Welcome to IIITA Hub</h1>
                 <h5 className="mb-4">Empowering Innovations</h5>
@@ -31,7 +35,7 @@ export default function Home() {
       </header>
 
       <section id="about" className="py-5 ">
-        <div className="container mt-5">
+        <div data-aos="fade-down" className="container mt-5">
           <div className="row">
             <div className="col-lg-6">
               <h2 className="display-4 mb-4">About Us</h2>
@@ -48,7 +52,7 @@ export default function Home() {
       <section id="features" className="py-5 bg-light">
         <div className="container">
           <h2 className="display-4 text-center mb-5">Our Features</h2>
-          <div className="row">
+          <div data-aos="fade-down" className="row">
             <div className="col-md-4 mb-4">
               <div className="card">
                 <div className="card-body">

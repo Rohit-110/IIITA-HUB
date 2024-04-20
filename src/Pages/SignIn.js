@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SignIn = () => {
-  const [isLoginForm, setIsLoginForm] = useState(true);
+  /*const [isLoginForm, setIsLoginForm] = useState(true);*/
   const [isAlumni, setIsAlumni] = useState(false); // State to track whether user is alumni or not
 
   const handleSignIn = () => {
@@ -15,7 +15,7 @@ const SignIn = () => {
     console.log('Registering...');
   };
 
-  const handleToggleForm = () => {
+  /*const handleToggleForm = () => {
     setIsLoginForm(!isLoginForm);
   };
 
@@ -23,7 +23,7 @@ const SignIn = () => {
     e.preventDefault();
     // Implement your login or register logic here
   };
-
+*/
   return (
     <div className="d-flex justify-content-center align-items-center h-100">
       {/* Left Half */}

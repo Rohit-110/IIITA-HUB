@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import noti from '../noti.png';
 import noti2 from '../noti2.png';
 import Notifications from './Notifications';
-import Noti from '../Pages/Noti';
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
