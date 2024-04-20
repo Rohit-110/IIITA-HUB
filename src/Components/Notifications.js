@@ -2,7 +2,7 @@ import React from 'react';
 
 const Notifications = ({ showNotifications }) => {
     return (
-        <div className={`z-auto dropdown-menu ${showNotifications ? 'show' : ''}`} style={{ position: "absolute", top: "50px", right: "0",  backgroundColor: "#fff", boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.1)", borderRadius: "8px", padding: "16px", zIndex: "100" }}>
+        <div className={`dropdown-menu ${showNotifications ? 'show' : ''}`} style={{ position: "absolute", top: "69px", right: "0",  backgroundColor: "#fff", boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.1)", borderRadius: "8px", padding: "16px", zIndex: "100" }}>
             <div className="dropdown-item mb-3" style={{ borderBottom: "1px solid #ddd" }}>
                 <h5 style={{ margin: "0", color: "#333" }}>Notifications</h5>
             </div>

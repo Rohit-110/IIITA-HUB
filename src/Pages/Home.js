@@ -34,7 +34,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section id="about" className="py-5 flex justify-center items-center">
+      <section id="about" className="py-5 flex justify-center items-center mb-4">
         <div data-aos="fade-down" className="container mt-5">
           <div className="flex flex-col lg:flex-row justify-center items-center">
             <div className="lg:w-8/12">
@@ -47,7 +47,7 @@ export default function Home() {
               </p>
             </div>
             <div className="lg:w-6/12">
-              <img src="https://via.placeholder.com/400" alt="About Us" className="mx-auto lg:mx-0 lg:ml-6 my-6 lg:my-0 img-fluid" />
+              <img src="https://placement.iiita.ac.in/assets/aboutImage.webp" alt="About Us" className="mx-auto lg:mx-0 lg:ml-6 my-6 lg:my-0 img-fluid" />
             </div>
           </div>
         </div>

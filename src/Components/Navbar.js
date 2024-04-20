@@ -1,11 +1,28 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import noti from '../noti.png';
 import noti2 from '../noti2.png';
 import Notifications from './Notifications';
+import Dropdown from './Dropdown';
+
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
+    let timeout;
+
+    const handleMouseEnter = () => {
+        clearTimeout(timeout);
+        setShowDropdown(true);
+    };
+
+    const handleMouseLeave = () => {
+        timeout = setTimeout(() => {
+            setShowDropdown(false);
+        }, 400); 
+        
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 0);
@@ -31,7 +48,7 @@ export default function Navbar() {
             <div className="container d-flex align-items-center justify-content-between ">
                 <h1 className="logo fs-2 pb-1 m-0">
                     <Link to="/" style={{ textDecoration: 'none', color: scrolled ? '#000' : '#ffffff' }}>
-                        IIITA Hub<span></span>
+                        IIITA Hub
                     </Link>
                 </h1>
                 <nav id="navbar" className="navbar">
@@ -41,15 +58,13 @@ export default function Navbar() {
                                 Explore
                             </Link>
                         </li>
-                        <li className="nav-item dropdown">
+                        <li className="nav-item dropdown" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                             <span className="nav-link dropdown-toggle p-3 fs-5" id="navbarDropdownMenuLink" style={{ textDecoration: 'none', color: scrolled ? '#000' : '#ffffff' }} role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Recruiters
                             </span>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><Link className="dropdown-item" to="/companies">Companies</Link></li>
-                                <li><Link className="dropdown-item" to="/stats">Statistics</Link></li>
-                            </ul>
+                            <Dropdown showDropdown={showDropdown} className="mr-10" />
                         </li>
+
                         <li className="nav-item">
                             <Link className="nav-link scrollto p-3 fs-5" to="/profile" style={{ textDecoration: 'none', color: scrolled ? '#000' : '#ffffff' }}>
                                 Profile
@@ -64,7 +79,7 @@ export default function Navbar() {
                             <Link to="/notifications"><span className="nav-link" style={{ cursor: 'pointer', color: scrolled ? '#000000' : '#ffffff' }}>
                                 <img className="mt-2 w-8" src={scrolled ? noti : noti2} alt="noti" />
                             </span></Link>
-                            <Notifications showNotifications={showNotifications} className="mr-10" />
+                            <Notifications showNotifications={showNotifications}/>
                         </li>
                     </ul>
                     <i className="bi bi-list mobile-nav-toggle"></i>

@@ -1,28 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Notifications = ({ showNotifications }) => {
-    return (
-        <div className={`z-auto dropdown-menu ${showNotifications ? 'show' : ''}`} style={{ position: "absolute", top: "50px", right: "0",  backgroundColor: "#fff", boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.1)", borderRadius: "8px", padding: "16px", zIndex: "100" }}>
-            <div className="dropdown-item mb-3" style={{ borderBottom: "1px solid #ddd" }}>
-                <h5 style={{ margin: "0", color: "#333" }}>Notifications</h5>
-            </div>
-            <div className="dropdown-item mb-3" style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "red", marginRight: "16px" }}></div>
-                <div>
-                    <h6 style={{ margin: "0", color: "#333" }}>New Internship Opportunities</h6>
-                    <p style={{ margin: "0", color: "#777" }}>Explore new internship opportunities posted by various companies.</p>
-                </div>
-            </div>
-            <div className="dropdown-item mb-3" style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "red", marginRight: "16px" }}></div>
-                <div>
-                    <h6 style={{ margin: "0", color: "#333" }}>Company X Hiring</h6>
-                    <p style={{ margin: "0", color: "#777" }}>Company X is looking for talented individuals to join their team.</p>
-                </div>
-            </div>
-            {/* Add more notification items as needed */}
+const Dropdown = ({ showDropdown }) => {
+  return (
+    <div className="relative">
+      {showDropdown && (
+        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <Link to='/companies' className="block px-4 py-2 text-m text-black hover:bg-gray-100 no-underline" role="menuitem">Companies</Link>
+            <hr className="my-0 border-black" />
+            <Link to='/statistics' className="block px-4 py-2 text-m text-black hover:bg-gray-100 no-underline" role="menuitem">Statistics</Link>
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
-export default Notifications;
+export default Dropdown;
