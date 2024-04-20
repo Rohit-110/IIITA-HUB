@@ -3,21 +3,20 @@ import img7 from '../images/img7.jpeg';
 import Navbar from '../Components/Navbar';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 const profileData = {
     image: img7,
     name: "Jai Khanna",
     email: "iit2022005@iiita.ac.in",
     phoneNumber: "8360708882",
-    skills: ["JavaScript", "React", "Node.js", "HTML", "CSS", "SQL"],
-    batch: 2026,
-    degree: "BTech IT",
-    cgpa: 8.03,
-    summary: "I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems."
+    batch: "BTech IT '26",
+    summary: "I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems.",
+    resume: ""
 };
 
 const Profile = () => {
-    useEffect(()=>{
-        AOS.init({duration:1500})
+    useEffect(() => {
+        AOS.init({ duration: 1500 })
     })
     return (
         <div>
@@ -25,23 +24,20 @@ const Profile = () => {
             <section className='bg-dark'>
                 <div className="container py-28">
                     <div className="row">
-                        <div data-aos="fade-right" className="col-lg-4">
+                        <div data-aos="fade-right" className="p-3 col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
                                     <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <h5 className="my-3">{profileData.name}</h5>
                                     <p className="text-muted mb-4">{profileData.summary}</p>
-                                    <div className="d-flex justify-content-center mb-2">
-                                        <button type="button" className="btn btn-outline-primary ms-1">Message</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div data-aos="fade-left" className="col-lg-8">
-                            <div className="card mb-10">
-                                <div className="card-body">
-                                    <div className="row">
+                        <div data-aos="fade-left" className="p-4 col-lg-8">
+                            <div className="card mb-10 ">
+                                <div className="card-body ">
+                                    <div className="row p-1.5">
                                         <div className="col-sm-3">
                                             <p className="mb-0">Full Name</p>
                                         </div>
@@ -50,7 +46,7 @@ const Profile = () => {
                                         </div>
                                     </div>
                                     <hr />
-                                    <div className="row">
+                                    <div className="row p-1.5">
                                         <div className="col-sm-3">
                                             <p className="mb-0">Email</p>
                                         </div>
@@ -59,7 +55,7 @@ const Profile = () => {
                                         </div>
                                     </div>
                                     <hr />
-                                    <div className="row">
+                                    <div className="row p-1.5">
                                         <div className="col-sm-3">
                                             <p className="mb-0">Phone</p>
                                         </div>
@@ -68,44 +64,27 @@ const Profile = () => {
                                         </div>
                                     </div>
                                     <hr />
-                                    <div className="row">
+                                    <div className="row p-1.5">
                                         <div className="col-sm-3">
                                             <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
                                             <p className="text-muted mb-0">{profileData.batch}</p>
                                         </div>
-                                    </div>
-                                    <hr />
-                                    <div className="row">
+                                    </div><hr />
+                                    <div className="row p-1.5">
                                         <div className="col-sm-3">
-                                            <p className="mb-1">Degree</p>
+                                            <p className="mb-0">Resume</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.degree}</p>
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div className="row">
-                                        <div className="col-sm-3">
-                                            <p className="mb-0">Skills</p>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.skills.join(', ')}</p> {/* Join the array elements */}
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div className="row">
-                                        <div className="col-sm-3">
-                                            <p className="mb-0">CGPA</p>
-                                        </div>
-                                        <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.cgpa}</p>
+                                            <Link to={profileData.resume}><p className="text-muted mb-0">Link</p></Link>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>

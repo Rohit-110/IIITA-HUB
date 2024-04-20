@@ -17,7 +17,7 @@ const Statistics = () => {
             <Scroll/>
             <Navbar />
             <div className='container mx-auto p-20'>
-                <h1 data-aos="fade-down" className='text-3xl md:text-6xl font-bold text-white mt-3 mb-10 text-center'>Placement Statistics</h1>
+                <h1 data-aos="fade-down" className='text-3xl md:text-6xl font-bold text-white mt-10 mb-10 text-center'>Placement Statistics</h1>
                 <div data-aos="fade-up" className='bg-white rounded-xl p-8 grid grid-cols-2 gap-8'>
                     <img src={img1} alt="Statistics 1" className='w-full h-full object-cover' />
                     <img src={img2} alt="Statistics 2" className='w-full h-full object-cover' />

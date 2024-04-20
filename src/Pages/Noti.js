@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
+import Scroll from '../Components/Scroll';
 
 const Noti = () => {
   const [notifications, setNotifications] = useState([
@@ -28,6 +29,7 @@ const Noti = () => {
   
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-8 bg-dark">
+      <Scroll/>
       <Navbar />
       <h1 className="text-3xl mt-16 font-bold ml-4 mb-4 text-white">Notifications</h1> 
 
