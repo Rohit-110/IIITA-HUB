@@ -23,7 +23,7 @@ const Profile = () => {
         <div>
             <Navbar />
             <section className='bg-dark'>
-                <div className="container py-20">
+                <div className="container py-28">
                     <div className="row">
                         <div data-aos="fade-right" className="col-lg-4">
                             <div className="card mb-4">
