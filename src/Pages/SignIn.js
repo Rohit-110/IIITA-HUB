@@ -13,7 +13,6 @@ const SignIn = () => {
     batchYear: '',
     resumeLink: ''
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -30,8 +29,8 @@ const SignIn = () => {
     }
 
     console.log(formData);
-    window.location.href = '/';
-
+    if(!isLogin && formData.isAlumni) window.location.href = '/alumHome';
+    else window.location.href = '/Home';
   };
 
 

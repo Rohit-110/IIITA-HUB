@@ -3,37 +3,10 @@ import { Link } from 'react-router-dom';
 import noti from '../noti.png';
 import noti2 from '../noti2.png';
 import Notifications from './Notifications';
-import Dropdown from './Dropdown';
 
-export default function Navbar() {
+export default function AlumNavbar() {
     const [scrolled, setScrolled] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
-    let timeout;
-
-    const handleMouseEnter = () => {
-        clearTimeout(timeout);
-        setShowDropdown(true);
-    };
-
-    const handleMouseLeave = () => {
-        timeout = setTimeout(() => {
-            setShowDropdown(false);
-        }, 200); 
-        
-    };
-    const toggleNotifications = () => {
-        clearTimeout(timeout);
-        setShowNotifications(true);
-    };
-
-    const toggleNotificationsOff = () => {
-        timeout = setTimeout(() => {
-            setShowNotifications(false);
-        }, 100); 
-        
-    };
-
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 0);
@@ -45,6 +18,10 @@ export default function Navbar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
+    const toggleNotifications = () => {
+        setShowNotifications(!showNotifications);
+    };
 
     const handleSignOut = () => {
         window.location.href = '/';
@@ -65,18 +42,6 @@ export default function Navbar() {
                 <nav id="navbar" className="navbar">
                     <ul className="navbar-nav d-flex flex-row">
                         <li className="nav-item">
-                            <Link className="nav-link scrollto p-3 fs-5" to="/search" style={{ textDecoration: 'none', color: scrolled ? '#000' : '#ffffff' }}>
-                                Explore
-                            </Link>
-                        </li>
-                        <li className="nav-item dropdown" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                            <span className="nav-link dropdown-toggle p-3 fs-5" id="navbarDropdownMenuLink" style={{ textDecoration: 'none', color: scrolled ? '#000' : '#ffffff' }} role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Recruiters
-                            </span>
-                            <Dropdown showDropdown={showDropdown} className="mr-10" />
-                        </li>
-
-                        <li className="nav-item">
                             <Link className="nav-link scrollto p-3 fs-5" to="/profile" style={{ textDecoration: 'none', color: scrolled ? '#000' : '#ffffff' }}>
                                 Profile
                             </Link>
@@ -86,7 +51,7 @@ export default function Navbar() {
                                 Contact Us
                             </Link>
                         </li>
-                        <li className="nav-item dropdown ml-4" onMouseEnter={toggleNotifications} onMouseLeave={toggleNotificationsOff}>
+                        <li className="nav-item dropdown ml-4" onMouseEnter={toggleNotifications} onMouseLeave={toggleNotifications}>
                             <Link to="/notifications"><span className="nav-link" style={{ cursor: 'pointer', color: scrolled ? '#000000' : '#ffffff' }}>
                                 <img className="mt-2 w-8" src={scrolled ? noti : noti2} alt="noti" />
                             </span></Link>

@@ -10,6 +10,8 @@ import Recruiters from './Pages/Recruiters';
 import Contact from './Pages/Contact';
 import Statistics from './Pages/Statistics';
 import Noti from './Pages/Noti';
+import AlumHome from './Pages/alumHome';
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [email, setEmail] = useState('')
@@ -18,8 +20,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-          <Route path="/signin" element={<SignIn setLoggedIn={setLoggedIn} setEmail={setEmail} />} /> 
+          <Route path="/" element={<SignIn setLoggedIn={setLoggedIn} setEmail={setEmail} />} /> 
+          <Route path="/home" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+          <Route path="/alumHome" element={<AlumHome email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/search" element={<Search/>}/>
           <Route path="/companies" element={<Recruiters/>}/>
