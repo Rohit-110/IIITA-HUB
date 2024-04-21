@@ -40,8 +40,7 @@ export default function Navbar() {
     };
 
     const handleSignOut = () => {
-        // Implement your sign out functionality here
-        console.log("Signing out...");
+        window.location.href = '/signin';
     };
 
     return (
