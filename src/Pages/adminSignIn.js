@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Footer from '../Components/Footer';
 
 const AdminSignIn = () => {
     const [formData, setFormData] = useState({
@@ -132,8 +131,6 @@ const AdminSignIn = () => {
                     </form>
                 </div>
             </div>
-            <hr className='m-0' />
-            <Footer />
         </div>
     );
 };

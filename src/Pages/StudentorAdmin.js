@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../Components/Footer';
 import { Link } from 'react-router-dom';
 
 const StuOrAdmin = () => {
@@ -37,19 +36,17 @@ const StuOrAdmin = () => {
                     <button 
                         className="w-full p-2 bg-indigo-600 border border-transparent rounded-md shadow-sm text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        <Link to="/signin" className='text-white'>Sign in as a Student/Alumni</Link>
+                        <Link to="/signin" className='text-white' style={{ textDecoration: 'none' }}>Sign in as a Student/Alumni</Link>
                     </button>
 
                     <button 
                         className="w-full p-2 bg-indigo-600 border border-transparent rounded-md shadow-sm text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        <Link to="/admin/signin" className='text-white'>Sign in as an Admin</Link>
+                        <Link to="/admin/signin" className='text-white' style={{ textDecoration: 'none' }}>Sign in as an Admin</Link>
                     </button>
                 </div>
 
             </div >
-            <hr className='m-0' />
-            <Footer />
         </div >
     );
 };

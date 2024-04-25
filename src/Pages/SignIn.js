@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Footer from '../Components/Footer';
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,22 +20,14 @@ const SignIn = () => {
       [name]: value
     });
   };
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@iiita\.ac\.in$/;
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!emailPattern.test(formData.email)) {
-      alert("Please enter a valid IIITA email address");
-      return; 
-    }
-
     console.log(formData);
     if(!isLogin && formData.isAlumni) window.location.href = '/alumHome';
     else window.location.href = '/Home';
   };
-
-
   return (
-    <div clas>
+    <div >
       <div className=" min-h-screen flex flex-col md:flex-row items-center justify-center bg-dark">
         {/* Left Side Content */}
         <div className="mb-20 md:w-1/2 p-8 flex flex-col justify-center items-center">
@@ -238,8 +229,6 @@ const SignIn = () => {
           </form>
         </div>
       </div>
-      <hr className='m-0' />
-      <Footer />
     </div>
   );
 };
