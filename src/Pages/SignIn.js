@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
+import { server } from '../index.js';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    name: '',
-    isAlumni: false,
-    phoneNumber: '',
-    degree: '',
-    batchYear: '',
-    resumeLink: ''
-  });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-  const handleSubmit = (e) => {
+  const [email,setEmail]=useState('');
+  const [password,setpassword]=useState('');
+  const [confirmPassword,setconfirmPassword]=useState('');
+  const [name,setname]=useState('');
+  const [isAlumni,setisAlumni]=useState('');
+  const [mobile,setmobile]=useState('');
+  const [degree,setdegree]=useState('');
+  const [batchYear,setbatchYear]=useState('');
+  const [resumeLink,setresumeLink]=useState('');
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData);
-    if(!isLogin && formData.isAlumni) window.location.href = '/alumHome';
-    else window.location.href = '/Home';
+    try{
+      const{data}= await axios.post(`${server}/student/new`,{
+        email,password,confirmPassword,name,isAlumni,mobile,degree,batchYear,resumeLink
+      },{
+        headers:{
+          "Content-Type":"application/json",
+        },
+        withCredentials:true,
+      });
+      toast.success(data.message);
+      window.location.href = '/alumHome';
+    }catch(err){
+      toast.error("Invalid Email or Password");
+      window.location.href = '/Home';
+    }
   };
+
   return (
     <div >
       <div className=" min-h-screen flex flex-col md:flex-row items-center justify-center bg-dark">
@@ -75,8 +83,8 @@ const SignIn = () => {
                 autoComplete="email"
                 required
                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                value={formData.email}
-                onChange={handleChange}
+                value={email}
+                onChange={(e)=>{setEmail(e.target.value)}}
               />
             </div>
             <div>
@@ -90,8 +98,8 @@ const SignIn = () => {
                 autoComplete="current-password"
                 required
                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                value={formData.password}
-                onChange={handleChange}
+                value={password}
+                onChange={(e)=>{setpassword(e.target.value)}}
               />
             </div>
             {!isLogin && (
@@ -108,8 +116,8 @@ const SignIn = () => {
                     autoComplete="current-password"
                     required
                     className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
+                    value={confirmPassword}
+                    onChange={(e)=>{setconfirmPassword(e.target.value)}}
                   />
                 </div>
                 <div className="w">
@@ -123,8 +131,8 @@ const SignIn = () => {
                         autoComplete="name"
                         required
                         className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        value={formData.name}
-                        onChange={handleChange}
+                        value={name}
+                        onChange={(e)=>{setname(e.target.value)}}
                       />
                     </div>
                 <div className="flex space-x-4">
@@ -134,14 +142,14 @@ const SignIn = () => {
                       Phone Number
                     </label>
                     <input
-                      id="phoneNumber"
-                      name="phoneNumber"
+                      id="mobile"
+                      name="mobile"
                       type="tel"
                       autoComplete="tel"
                       required
                       className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
+                      value={mobile}
+                      onChange={(e)=>{setmobile(e.target.value)}}
                     />
                   </div>
 
@@ -154,8 +162,8 @@ const SignIn = () => {
                       id="isAlumni"
                       name="isAlumni"
                       className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                      value={formData.isAlumni}
-                      onChange={handleChange}
+                      value={isAlumni}
+                      onChange={(e)=>{setisAlumni(e.target.value)}}
                     >
                       <option value="false">No</option>
                       <option value="true">Yes</option>
@@ -176,8 +184,8 @@ const SignIn = () => {
                         autoComplete="degree"
                         required
                         className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        value={formData.degree}
-                        onChange={handleChange}
+                        value={degree}
+                        onChange={(e)=>{setdegree(e.target.value)}}
                       />
                     </div>
 
@@ -193,8 +201,8 @@ const SignIn = () => {
                         autoComplete="batch-year"
                         required
                         className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                        value={formData.batchYear}
-                        onChange={handleChange}
+                        value={batchYear}
+                        onChange={(e)=>{setbatchYear(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -211,8 +219,8 @@ const SignIn = () => {
                     autoComplete="resume-link"
                     required
                     className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    value={formData.resumeLink}
-                    onChange={handleChange}
+                    value={resumeLink}
+                    onChange={(e)=>{setresumeLink(e.target.value)}}
                   />
                 </div>
               </>
