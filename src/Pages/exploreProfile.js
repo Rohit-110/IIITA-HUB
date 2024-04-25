@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import img7 from '../images/img7.jpeg';
+import Navbar from '../Components/Navbar';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link, useParams} from 'react-router-dom';
-import AlumNavbar from '../Components/AlumNavbar';
-const profileData = {"Jai Khanna":{
+import { Link } from 'react-router-dom';
+const profileData = {
     image: img7,
     name: "Jai Khanna",
     email: "iit2022005@iiita.ac.in",
@@ -12,21 +12,20 @@ const profileData = {"Jai Khanna":{
     batch: "BTech IT '26",
     summary: "I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems.",
     resume: ""
-}};
-
-const AlumProfile = () => {
+};
+const handleReferral = () => {
+    const refID = document.getElementById('ref');
+        refID.innerText = "Mail sent succesfully!";
+        refID.style.backgroundColor = "green";
+        refID.style.borderColor = "green";
+}
+const ExploreProfile = () => {
     useEffect(() => {
         AOS.init({ duration: 1500 })
     })
-
-    const { name } = useParams();
-    const profile = profileData[name];
-    if (!profile) {
-        return <div>Profile not found</div>; 
-    }
     return (
         <div>
-            <AlumNavbar />
+            <Navbar />
             <section className='bg-dark'>
                 <div className="container py-28">
                     <div className="row">
@@ -36,6 +35,9 @@ const AlumProfile = () => {
                                     <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <h5 className="my-3">{profileData.name}</h5>
                                     <p className="text-muted mb-4">{profileData.summary}</p>
+                                    <button id="ref" onClick={handleReferral} className="border-2 text-white border-blue-500 border-solid rounded bg-blue-500 p-2 hover:bg-blue-600">
+                                       Ask for Referral
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -98,4 +100,4 @@ const AlumProfile = () => {
     );
 };
 
-export default AlumProfile;
+export default ExploreProfile;

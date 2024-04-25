@@ -13,6 +13,7 @@ import AlumHome from './Pages/alumHome';
 import AlumContact from './Pages/alumContact';
 import AlumProfile from './Pages/alumProfile';
 import AlumNoti from './Pages/alumNoti';
+import ExploreProfile from './Pages/exploreProfile';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -28,6 +29,7 @@ function App() {
           <Route path="/alumContact" element={<AlumContact/>}/>
           <Route path="/alumProfile" element={<AlumProfile/>}/>
           <Route path="/alumNotifications" element={<AlumNoti/>}/>
+          <Route path="/exploreProfile" element={<ExploreProfile/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/search" element={<Search/>}/>
           <Route path="/companies" element={<Recruiters/>}/>
