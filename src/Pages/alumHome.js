@@ -6,11 +6,10 @@ import Scroll from '../Components/Scroll';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-export default function AlumHome() { // corrected component name to start with uppercase
+export default function AlumHome() {
     useEffect(() => {
       AOS.init({ duration: 1500 });
-    }, []); // added empty dependency array to run the effect only once
-  
+    }, []); 
     const scrollToAbout = () => {
       const aboutSection = document.getElementById('about');
       aboutSection.scrollIntoView({ behavior: 'smooth' });

@@ -23,7 +23,7 @@ export default function Home() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat"
         }}>
-          <div data-aos="zoom-in" className="d-flex justify-content-center align-items-center h-100">
+          <div data-aos="fade-down" className="d-flex justify-content-center align-items-center h-100">
             <div className="text-white">
               <h1 className="mb-3">Welcome to IIITA Hub</h1>
               <h5 className="mb-4">Empowering Innovations</h5>

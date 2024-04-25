@@ -93,7 +93,7 @@ export default function Navbar() {
                             <Notifications showNotifications={showNotifications}/>
                         </li>
                         <li className="nav-item ml-3">
-                            <button onClick={handleSignOut} className="nav-link btn btn-danger p-3 fs-5" style={{ textDecoration: 'none', color: '#ffffff' }}>
+                            <button onClick={handleSignOut} className="nav-link btn btn-danger p-3 fs-5" style={{ textDecoration: 'none', color: scrolled? '#000000' : '#ffffff' }}>
                                 Sign Out
                             </button>
                         </li>
