@@ -7,6 +7,7 @@ const SignIn = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    name: '',
     isAlumni: false,
     phoneNumber: '',
     degree: '',
@@ -120,6 +121,21 @@ const SignIn = () => {
                     onChange={handleChange}
                   />
                 </div>
+                <div className="w">
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                        Name
+                      </label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        required
+                        className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
+                    </div>
                 <div className="flex space-x-4">
                   {/* Phone Number Input */}
                   <div className="w-1/2">

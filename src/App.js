@@ -1,6 +1,5 @@
 import './css/App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { useState } from 'react'
 import SignIn from './Pages/SignIn';
 import Home from './Pages/Home';
 import Profile from './Pages/Profile';
@@ -12,23 +11,30 @@ import Noti from './Pages/Noti';
 import AlumHome from './Pages/alumHome';
 import AlumContact from './Pages/alumContact';
 import AlumProfile from './Pages/alumProfile';
-import AlumNoti from './Pages/alumNoti';
 import ExploreProfile from './Pages/exploreProfile';
+import StuOrAdmin from './Pages/StudentorAdmin';
+import AdminSignIn from './Pages/adminSignIn';
+import AdminContact from './Pages/adminContact';
+import AdminProfile from './Pages/adminProfile';
+import AdminNoti from './Pages/adminNoti';
+import AdminHome from './Pages/adminHome';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [email, setEmail] = useState('')
-
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignIn setLoggedIn={setLoggedIn} setEmail={setEmail} />} /> 
-          <Route path="/home" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-          <Route path="/alumHome" element={<AlumHome email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+          <Route path="/" element={<StuOrAdmin/>} /> 
+          <Route path="/signin" element={<SignIn/>} /> 
+          <Route path="/home" element={<Home/>} />
+          <Route path="/admin/signin" element={<AdminSignIn/>} /> 
+          <Route path="/admin/contact" element={<AdminContact/>} /> 
+          <Route path="/admin/profile" element={<AdminProfile/>} /> 
+          <Route path="/admin/notifications" element={<AdminNoti/>} /> 
+          <Route path="/admin/home" element={<AdminHome/>} /> 
+          <Route path="/alumHome" element={<AlumHome />}/>
           <Route path="/alumContact" element={<AlumContact/>}/>
           <Route path="/alumProfile" element={<AlumProfile/>}/>
-          <Route path="/alumNotifications" element={<AlumNoti/>}/>
           <Route path="/exploreProfile" element={<ExploreProfile/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/search" element={<Search/>}/>
