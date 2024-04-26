@@ -36,10 +36,8 @@ const SignIn = () => {
         withCredentials:true,
       });
       toast.success("Logged In Successfully");
-      window.location.href = '/alumHome';
     }catch(err){
       toast.error("Invalid Email or Password");
-      window.location.href = '/Home';
     }
   };
 
