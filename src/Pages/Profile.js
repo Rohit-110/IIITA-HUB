@@ -4,6 +4,12 @@ import Navbar from '../Components/Navbar';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import { server } from '..';
+import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { Context } from '..';
 const profileData = {
     image: img7,
     name: "Jai Khanna",
@@ -18,6 +24,22 @@ const Profile = () => {
     useEffect(() => {
         AOS.init({ duration: 1500 })
     })
+
+   const{setUser , setIsAuthenticated} = useContext(Context);
+   
+   useEffect(()=>{
+    axios.get(`${server}/student/me`,{
+        withCredentials: true
+    }).then((res)=>{
+        setUser(res.data.user);
+        setIsAuthenticated(true);
+    }).catch((err)=>{
+        setUser({});
+        toast.error('Error');
+    })
+   },[])
+    
+  
     return (
         <div>
             <Navbar />
@@ -60,7 +82,7 @@ const Profile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.phoneNumber}</p>
+                                            <p className="text-muted mb-0">{profileData.mobile}</p>
                                         </div>
                                     </div>
                                     <hr />

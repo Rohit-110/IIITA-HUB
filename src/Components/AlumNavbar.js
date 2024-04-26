@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { Context } from '..';
+import axios from 'axios';
+import { server } from '..';
 
 export default function AlumNavbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -14,10 +19,24 @@ export default function AlumNavbar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    const handleSignOut = () => {
-        window.location.href = '/';
-    };
+    const {isAuthenticated, setIsAuthenticated}= useContext(Context);
+    
+            const handleSignOut = async()=>{
+            console.log("Hello ");
+            try{
+                const {data} = await axios.get(`${server}/student/logout`,
+            {
+                withCredentials: true,
+            }
+            );
+            toast.success("You are logged out");
+            setIsAuthenticated(false);
+            window.location.href = '/signin';
+        }catch(error){
+                toast.error("Error");
+                setIsAuthenticated(true);
+            }
+        };
 
     return (
         <header

@@ -2,28 +2,35 @@ import React, { useState } from 'react';
 import Scroll from '../Components/Scroll';
 import AdminNavbar from '../Components/AdminNavbar';
 import Footer from '../Components/Footer';
+import axios from 'axios';
+import { useContext } from 'react';
+import { Context } from '../index';
+import { server } from '../index';
+import toast from 'react-hot-toast';
 
 const AdminNoti = () => {
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [description, setdescription] = useState('');
+  const [isread, setisread] = useState('false');
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
-  const handleContentChange = (e) => {
-    setContent(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can handle the submission, like sending the notification
-    // For demonstration, let's just log the title and content for now
-    console.log('Title:', title);
-    console.log('Content:', content);
-    // Clear the form fields after submission
-    setTitle('');
-    setContent('');
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+          let { data } = await axios.post(`${server}/admin/noitfication`, {
+              title, description, isread
+          }, {
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              withCredentials: true,
+          });
+          toast.success("Notification sent");
+          setIsAuthenticated(true);
+      } catch (err) {
+          toast.error(err.response.data.message);
+      }
   };
 
   return (
@@ -39,7 +46,7 @@ const AdminNoti = () => {
               id="title"
               type="text"
               value={title}
-              onChange={handleTitleChange}
+              onChange={(e)=>{setTitle(e.target.value)}}
               className="w-full bg-white border border-gray-600 text-black py-2 px-3 rounded-md placeholder-gray-400 focus:outline-none focus:border-indigo-500"
               placeholder="Enter title"
               required
@@ -49,8 +56,8 @@ const AdminNoti = () => {
             <label htmlFor="content" className="block text-white text-xl font-medium mb-1">Content</label>
             <textarea
               id="content"
-              value={content}
-              onChange={handleContentChange}
+              value={description}
+              onChange={(e)=>{setdescription(e.target.value)}}
               className="w-full h-32 bg-white border border-gray-600 text-black py-2 px-3 rounded-md resize-none placeholder-gray-400 focus:outline-none focus:border-indigo-500"
               placeholder="Enter content"
               required

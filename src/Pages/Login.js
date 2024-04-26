@@ -7,37 +7,35 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setpassword] = useState('');
-  const [confirmPassword, setconfirmPassword] = useState('');
-  const [name, setname] = useState('');
-  const [isAlumni, setisAlumni] = useState('');
-  const [mobile, setmobile] = useState('');
-  const [degree, setdegree] = useState('');
-  const [batchYear, setbatchYear] = useState('');
-  const [resumeLink, setresumeLink] = useState('');
 
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
-  const handleSubmit = async (e) => {
+  const {isAuthenticated, setIsAuthenticated} = useContext(Context);
+  const [email, setEmail]=useState("");
+  const [password, setpassword]=useState("");
+  
+  
+  const handleSubmit = async(e)=>{
       e.preventDefault();
-      try {
-          let { data } = await axios.post(`${server}/student/new`, {
-              email, password, confirmPassword, name, isAlumni, mobile, degree, batchYear, resumeLink
-          }, {
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              withCredentials: true,
-          });
-          toast.success("Logged In Successfully");
-          setIsAuthenticated(true);
-          if (isAlumni === "true") window.location.href = '/alumHome';
-          else window.location.href = '/home';
-      } catch (err) {
-          toast.error(err.response.data.message);
-      }
-  };
+      try{
+        const {data} = await axios.post(`${server}/student/login`,{
+        email,password,
+      },{
+        headers:{          
+          "Content-Type":"application/json",          
+        },
+        withCredentials: true,
+      }    
+    );
+    toast.success(data.message);
+    setIsAuthenticated(true);
+    window.location.href = '/home';
+  }catch(error){
+          toast.error('Invalid Email or Password');
+          console.log(error.response.data.message);
+          setIsAuthenticated(false);
+    }
+
+    
+};
   
 
   return (

@@ -23,30 +23,27 @@ const profileData = {
 
 const AdminProfile = () => {
     
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const {isAuthenticated, setIsAuthenticated}= useContext(Context);
 
     useEffect(() => {
         AOS.init({ duration: 1500 })
     })
    
+
     const [appliers,setAppliers]=useState([]);
 
-    const {user ,setUser} =useContext(Context);
-
     useEffect(()=>{
-        axios.get(`${server}/admin/me`,{
-            withCredentials: true
-        }).then((res)=>{
-            setUser(res.data.user);
-            console.log(user);
-            setIsAuthenticated(true);
-        }).catch((err)=>{
-            console.log(user);
-            setUser({});
-            setIsAuthenticated(false);
-            toast.error('Error');
-        })
-    },[])
+    
+      axios.get(`${server}/admin/me`,{
+        withCredentials: true,
+      }).then((res)=>{
+        setAppliers(res.data.user);
+        setIsAuthenticated(true);
+      }).catch((error)=>{
+        toast.error('Error');
+      })
+    
+    },[]);
   
 
     return (
@@ -73,7 +70,7 @@ const AdminProfile = () => {
                                             <p className="mb-0">Full Name</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{user.name}</p>
+                                            <p className="text-muted mb-0">{appliers.name}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -82,7 +79,7 @@ const AdminProfile = () => {
                                             <p className="mb-0">Email</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{user.email}</p>
+                                            <p className="text-muted mb-0">{appliers.email}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -91,7 +88,7 @@ const AdminProfile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{user.mobile}</p>
+                                            <p className="text-muted mb-0">{appliers.mobile}</p>
                                         </div>
                                     </div>
                                     <hr />

@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import noti from '../noti.png';
 import noti2 from '../noti2.png';
+import axios from 'axios';
+import { server } from '..';
+import { useContext } from 'react';
+import { Context } from '..';
+import toast from 'react-hot-toast';
 
 export default function AdminNavbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -17,9 +22,24 @@ export default function AdminNavbar() {
         };
     }, []);
 
-    const handleSignOut = () => {
-        window.location.href = '/';
-    };
+    const {isAuthenticated, setIsAuthenticated}= useContext(Context);
+    
+            const handleSignOut = async()=>{
+            console.log("Hello ");
+            try{
+                const {data} = await axios.get(`${server}/admin/logout`,
+            {
+                withCredentials: true,
+            }
+            );
+            toast.success("You are logged out");
+            setIsAuthenticated(false);
+            window.location.href = '/signin';
+        }catch(error){
+                toast.error("Error");
+                setIsAuthenticated(true);
+            }
+        };
 
     return (
         <header

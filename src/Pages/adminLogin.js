@@ -7,38 +7,35 @@ import { Link } from 'react-router-dom';
 
 const AdminLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setpassword] = useState('');
-  const [confirmPassword, setconfirmPassword] = useState('');
-  const [name, setname] = useState('');
-  const [isAlumni, setisAlumni] = useState('');
-  const [mobile, setmobile] = useState('');
-  const [degree, setdegree] = useState('');
-  const [batchYear, setbatchYear] = useState('');
-  const [resumeLink, setresumeLink] = useState('');
 
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
-  const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-          let { data } = await axios.post(`${server}/student/new`, {
-              email, password, confirmPassword, name, isAlumni, mobile, degree, batchYear, resumeLink
-          }, {
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              withCredentials: true,
-          });
-          toast.success("Logged In Successfully");
-          setIsAuthenticated(true);
-          if (isAlumni === "true") window.location.href = '/alumHome';
-          else window.location.href = '/home';
-      } catch (err) {
-          toast.error(err.response.data.message);
-      }
-  };
+  const {isAuthenticated, setIsAuthenticated} = useContext(Context);
+  const [email, setEmail]=useState("");
+  const [password, setpassword]=useState("");
   
+  
+  const handleSubmit = async(e)=>{
+      e.preventDefault();
+      try{
+        const {data} = await axios.post(`${server}/admin/login`,{
+        email,password,
+      },{
+        headers:{          
+          "Content-Type":"application/json",          
+        },
+        withCredentials: true,
+      }    
+    );
+    toast.success(data.message);
+    setIsAuthenticated(true);
+    window.location.href = '/admin/home';
+  }catch(error){
+          toast.error('Invalid Email or Password');
+          console.log(error.response.data.message);
+          setIsAuthenticated(false);
+    }
+
+    
+};
 
   return (
     <div >
@@ -112,9 +109,7 @@ const AdminLogin = () => {
               <button
                 type="submit"
                 className="w-full p-2 bg-indigo-600 border border-transparent rounded-md shadow-sm text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Log in
-              </button>
+              >Log in</button>
 
             </div>
           </form>

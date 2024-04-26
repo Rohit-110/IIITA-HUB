@@ -56,13 +56,14 @@ export default function Navbar() {
             const handleSignOut = async()=>{
             console.log("Hello ");
             try{
-                const {data} = await axios.get(`${server}/users/logout`,
+                const {data} = await axios.get(`${server}/student/logout`,
             {
                 withCredentials: true,
             }
             );
             toast.success("You are logged out");
             setIsAuthenticated(false);
+            window.location.href = '/signin';
         }catch(error){
                 toast.error("Error");
                 setIsAuthenticated(true);
