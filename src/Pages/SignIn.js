@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { server } from '../index.js';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { Context } from '../index.js';
+import { Navigate } from 'react-router-dom';
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +18,12 @@ const SignIn = () => {
   const [batchYear,setbatchYear]=useState('');
   const [resumeLink,setresumeLink]=useState('');
 
+
+
+  const {isAuthenticated, setIsAuthenticated}= useContext(Context);
+
+  if(!isAuthenticated)return <Navigate to="/"/>
+
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
@@ -26,7 +35,7 @@ const SignIn = () => {
         },
         withCredentials:true,
       });
-      toast.success(data.message);
+      toast.success("Logged In Successfully");
       window.location.href = '/alumHome';
     }catch(err){
       toast.error("Invalid Email or Password");

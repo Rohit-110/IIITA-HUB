@@ -18,6 +18,7 @@ import AdminContact from './Pages/adminContact';
 import AdminProfile from './Pages/adminProfile';
 import AdminNoti from './Pages/adminNoti';
 import AdminHome from './Pages/adminHome';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/notifications" element={<Noti/>}/>
         </Routes>
+        <Toaster/>
       </BrowserRouter>
     </div>
   )
