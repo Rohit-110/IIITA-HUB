@@ -33,14 +33,15 @@ const AdminProfile = () => {
     const [appliers,setAppliers]=useState([]);
 
     useEffect(()=>{
-    
       axios.get(`${server}/admin/me`,{
         withCredentials: true,
       }).then((res)=>{
-        setAppliers(res.data.user);
+        console.log(res);
+        setAppliers(res.data.admin);
         setIsAuthenticated(true);
+        toast.success('Success hai bro');
       }).catch((error)=>{
-        toast.error('Error');
+        toast.error('Error hai bhai');
       })
     
     },[]);
@@ -55,8 +56,7 @@ const AdminProfile = () => {
                         <div data-aos="fade-right" className="p-3 col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
-                                    <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
-                                    <h5 className="my-3">{profileData.name}</h5>
+                                    <img src={appliers.photo} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <p className="text-muted mb-4">{profileData.summary}</p>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@ const AdminProfile = () => {
                                             <p className="mb-0">Full Name</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{appliers.name}</p>
+                                            <p className="text-muted mb-0"><h5>{appliers.name}</h5></p>
                                         </div>
                                     </div>
                                     <hr />
@@ -79,7 +79,7 @@ const AdminProfile = () => {
                                             <p className="mb-0">Email</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{appliers.email}</p>
+                                            <p className="text-muted mb-0"><h5>{appliers.email}</h5></p>
                                         </div>
                                     </div>
                                     <hr />
@@ -88,7 +88,7 @@ const AdminProfile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{appliers.mobile}</p>
+                                            <p className="text-muted mb-0"><h5>{appliers.mobile}</h5></p>
                                         </div>
                                     </div>
                                     <hr />
