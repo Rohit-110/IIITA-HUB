@@ -19,6 +19,7 @@ const SignIn = () => {
   const [photo, setphoto] = useState('');
 
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const { checkemail, setCheckemail } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,8 +92,8 @@ const SignIn = () => {
                 required
                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 value={email}
-                onChange={(e) => { setEmail(e.target.value) }}
-              />
+                onChange={(e)=>{setEmail(e.target.value);setCheckemail(e.target.value)}}
+                />
             </div>
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">

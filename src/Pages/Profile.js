@@ -20,25 +20,29 @@ const profileData = {
     resume: ""
 };
 
-const Profile = () => {
+const Profile = () => {    
+  const {isAuthenticated}= useContext(Context);
     useEffect(() => {
         AOS.init({ duration: 1500 })
     })
 
    const{setUser , setIsAuthenticated} = useContext(Context);
    
+   const [appliers,setAppliers]=useState([]);
+
    useEffect(()=>{
-    axios.get(`${server}/student/me`,{
-        withCredentials: true
-    }).then((res)=>{
-        setUser(res.data.user);
-        setIsAuthenticated(true);
-    }).catch((err)=>{
-        setUser({});
-        toast.error('Error');
-    })
-   },[])
-    
+
+     axios.get(`${server}/student/me`,{
+       withCredentials: true,
+     }).then((res)=>{
+       setAppliers(res.data.user);
+       setIsAuthenticated(true);
+     }).catch((error)=>{
+       toast.error('Error hai bhai');
+     })
+   
+   },[]);
+   
   
     return (
         <div>
@@ -49,8 +53,7 @@ const Profile = () => {
                         <div data-aos="fade-right" className="p-3 col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
-                                    <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
-                                    <h5 className="my-3">{profileData.name}</h5>
+                                    <img src={appliers.photo} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <p className="text-muted mb-4">{profileData.summary}</p>
                                 </div>
                             </div>
@@ -64,7 +67,7 @@ const Profile = () => {
                                             <p className="mb-0">Full Name</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.name}</p>
+                                            <p className="text-muted mb-0">{appliers.name}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -73,7 +76,7 @@ const Profile = () => {
                                             <p className="mb-0">Email</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.email}</p>
+                                            <p className="text-muted mb-0">{appliers.email}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -82,7 +85,7 @@ const Profile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.mobile}</p>
+                                            <p className="text-muted mb-0">{appliers.mobile}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -91,7 +94,7 @@ const Profile = () => {
                                             <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.batch}</p>
+                                            <p className="text-muted mb-0">{appliers.batch}</p>
                                         </div>
                                     </div><hr />
                                     <div className="row p-1.5">
@@ -99,7 +102,7 @@ const Profile = () => {
                                             <p className="mb-0">Resume</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <Link to={profileData.resume}><p className="text-muted mb-0">Link</p></Link>
+                                            <Link to={appliers.resume}><p className="text-muted mb-0">Link</p></Link>
                                         </div>
                                     </div>
                                 </div>
