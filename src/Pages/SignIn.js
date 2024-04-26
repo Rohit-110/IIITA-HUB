@@ -15,12 +15,15 @@ const SignIn = () => {
   const [batchYear,setbatchYear]=useState('');
   const [resumeLink,setresumeLink]=useState('');
 
+  let data={
+    "message":"Internal error"
+  }
 
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      const{data}= await axios.post(`${server}/student/new`,{
+      data= await axios.post(`${server}/student/new`,{
         email,password,confirmPassword,name,isAlumni,mobile,degree,batchYear,resumeLink
       },{
         headers:{
@@ -29,10 +32,10 @@ const SignIn = () => {
         withCredentials:true,
       });
       toast.success("Logged In Successfully");
-      window.location.href = '/alumHome';
-    }catch(err){
-      toast.error("Invalid Email or Password");
+      if(isAlumni==="true")window.location.href = '/alumHome';
       window.location.href = '/Home';
+    }catch(err){
+      toast.error(data.message);
     }
   };
 
