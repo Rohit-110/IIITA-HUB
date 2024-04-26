@@ -10,6 +10,7 @@ import { useContext } from 'react';
 import { Context } from '../index';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import img1 from '../assets/img2.png'
 
 const profileData = {
     image: img7,
@@ -39,9 +40,9 @@ const AdminProfile = () => {
         console.log(res);
         setAppliers(res.data.admin);
         setIsAuthenticated(true);
-        toast.success('Success hai bro');
+        toast.success('Success');
       }).catch((error)=>{
-        toast.error('Error hai bhai');
+        toast.error('Error');
       })
     
     },[]);
@@ -56,14 +57,14 @@ const AdminProfile = () => {
                         <div data-aos="fade-right" className="p-3 col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
-                                    <img src={appliers.photo} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
+                                    <img src={img1} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <p className="text-muted mb-4">{profileData.summary}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div data-aos="fade-left" className="p-4 col-lg-8">
-                            <div className="card mt-14  ">
+                            <div className="card mb-10 ">
                                 <div className="card-body ">
                                     <div className="row p-1.5">
                                         <div className="col-sm-3">

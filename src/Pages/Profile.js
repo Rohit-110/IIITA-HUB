@@ -10,6 +10,7 @@ import { server } from '..';
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import { Context } from '..';
+import img1 from '../assets/img2.png'
 const profileData = {
     image: img7,
     name: "Jai Khanna",
@@ -21,28 +22,29 @@ const profileData = {
 };
 
 const Profile = () => {    
-  const {isAuthenticated}= useContext(Context);
+    const {isAuthenticated, setIsAuthenticated}= useContext(Context);
+
     useEffect(() => {
         AOS.init({ duration: 1500 })
     })
-
-   const{setUser , setIsAuthenticated} = useContext(Context);
    
-   const [appliers,setAppliers]=useState([]);
 
-   useEffect(()=>{
+    const [appliers,setAppliers]=useState([]);
 
-     axios.get(`${server}/student/me`,{
-       withCredentials: true,
-     }).then((res)=>{
-       setAppliers(res.data.user);
-       setIsAuthenticated(true);
-     }).catch((error)=>{
-       toast.error('Error hai bhai');
-     })
-   
-   },[]);
-   
+    useEffect(()=>{
+      axios.get(`${server}/student/me`,{
+        withCredentials: true,
+      }).then((res)=>{
+        console.log(res);
+        setAppliers(res.data.student);
+        setIsAuthenticated(true);
+        toast.success('Success');
+      }).catch((error)=>{
+        toast.error('Error');
+      })
+    
+    },[]);
+  
   
     return (
         <div>
@@ -53,7 +55,7 @@ const Profile = () => {
                         <div data-aos="fade-right" className="p-3 col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
-                                    <img src={appliers.photo} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
+                                    <img src={img1} alt="avatar" className="rounded-circle h-36 w-10" style={{ width: "150px" }} />
                                     <p className="text-muted mb-4">{profileData.summary}</p>
                                 </div>
                             </div>
@@ -94,7 +96,7 @@ const Profile = () => {
                                             <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{appliers.batch}</p>
+                                            <p className="text-muted mb-0">{ (appliers.batch=='')? appliers.batch : '2026'}</p>
                                         </div>
                                     </div><hr />
                                     <div className="row p-1.5">
