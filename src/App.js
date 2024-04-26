@@ -19,6 +19,8 @@ import AdminProfile from './Pages/adminProfile';
 import AdminNoti from './Pages/adminNoti';
 import AdminHome from './Pages/adminHome';
 import { Toaster } from 'react-hot-toast';
+import Login from './Pages/Login';
+import AdminLogin from './Pages/adminLogin';
 
 function App() {
   return (
@@ -26,9 +28,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<StuOrAdmin/>} /> 
+          <Route path="/login" element={<Login/>} /> 
           <Route path="/signin" element={<SignIn/>} /> 
           <Route path="/home" element={<Home/>} />
           <Route path="/admin/signin" element={<AdminSignIn/>} /> 
+          <Route path="/admin/login" element={<AdminLogin/>} /> 
           <Route path="/admin/contact" element={<AdminContact/>} /> 
           <Route path="/admin/profile" element={<AdminProfile/>} /> 
           <Route path="/admin/notifications" element={<AdminNoti/>} /> 

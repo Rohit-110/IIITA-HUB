@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Context, server } from '../index.js';
+import { Link } from 'react-router-dom';
 
 
 const SignIn = () => {
@@ -69,10 +70,10 @@ const SignIn = () => {
         {/* Right Side Content */}
         <div className="mr-12 mt-10 mb-20 max-w-md w-full space-y-8 p-8 bg-white shadow-lg rounded-md">
           <div>
-            <h2 className="text-center text-3xl font-bold text-gray-800">{isLogin ? 'Login' : 'Create an account'}</h2>
+            <h2 className="text-center text-3xl font-bold text-gray-800">Create an account</h2>
             <p className="mt-2 text-center text-sm text-gray-600">Or{' '}
               <button onClick={() => setIsLogin(!isLogin)} className="text-blue-500 hover:text-blue-700">
-                {isLogin ? 'create a new account' : 'login to your account'}
+                <Link style={{"textDecoration":"none"}}to="/login">login to your account</Link>
               </button>
             </p>
           </div>
@@ -107,9 +108,6 @@ const SignIn = () => {
                 onChange={(e)=>{setpassword(e.target.value)}}
               />
             </div>
-            {!isLogin && (
-              <>
-
                 <div>
                   <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                     Confirm Password
@@ -228,14 +226,12 @@ const SignIn = () => {
                     onChange={(e)=>{setresumeLink(e.target.value)}}
                   />
                 </div>
-              </>
-            )}
             <div>
               <button
                 type="submit"
                 className="w-full p-2 bg-indigo-600 border border-transparent rounded-md shadow-sm text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                  {isLogin ? 'Log in' : 'Sign up'}
+                 Sign up
               </button>
 
             </div>

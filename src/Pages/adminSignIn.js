@@ -4,6 +4,7 @@ import { Context } from '../index';
 import { server } from '../index';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const AdminSignIn = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -11,9 +12,9 @@ const AdminSignIn = () => {
     const [password, setpassword] = useState('');
     const [name, setname] = useState('');
     const [mobile, setmobile] = useState('');
-  
+
     const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-  
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -32,7 +33,7 @@ const AdminSignIn = () => {
             toast.error(err.response.data.message);
         }
     };
-    
+
 
     return (
         <div clas>
@@ -64,7 +65,12 @@ const AdminSignIn = () => {
                 {/* Right Side Content */}
                 <div className="mr-12 mt-10 mb-20 max-w-md w-full space-y-8 p-8 bg-white shadow-lg rounded-md">
                     <div>
-                        <h2 className="text-center text-3xl font-bold text-gray-800">Sign in as Admin</h2>
+                        <h2 className="text-center text-3xl font-bold text-gray-800">Create an account</h2>
+                        <p className="mt-2 text-center text-sm text-gray-600">Or{' '}
+                            <button onClick={() => setIsLogin(!isLogin)} className="text-blue-500 hover:text-blue-700">
+                                <Link style={{"textDecoration":"none"}} to="/admin/login">login to your account</Link>
+                            </button>
+                        </p>
                     </div>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
@@ -79,7 +85,7 @@ const AdminSignIn = () => {
                                 required
                                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                 value={email}
-                                onChange={(e)=>{setEmail(e.target.value)}}
+                                onChange={(e) => { setEmail(e.target.value) }}
                             />
                         </div>
                         <div className="w">
@@ -94,7 +100,7 @@ const AdminSignIn = () => {
                                 required
                                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                 value={name}
-                                onChange={(e)=>{setname(e.target.value)}}
+                                onChange={(e) => { setname(e.target.value) }}
                             />
                         </div>
                         <div className="flex space-x-4">
@@ -111,7 +117,7 @@ const AdminSignIn = () => {
                                     required
                                     className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                     value={mobile}
-                                    onChange={(e)=>{setmobile(e.target.value)}}
+                                    onChange={(e) => { setmobile(e.target.value) }}
                                 />
                             </div>
                         </div>
@@ -128,7 +134,7 @@ const AdminSignIn = () => {
                                 required
                                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                 value={password}
-                                onChange={(e)=>{setpassword(e.target.value)}}
+                                onChange={(e) => { setpassword(e.target.value) }}
                             />
                         </div>
 
