@@ -1,25 +1,38 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
+import { Context } from '../index';
+import { server } from '../index';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const AdminSignIn = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        name: '',
-        phoneNumber: ''
-    });
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-    const handleSubmit = (e) => {
+    const [isLogin, setIsLogin] = useState(true);
+    const [email, setEmail] = useState('');
+    const [password, setpassword] = useState('');
+    const [name, setname] = useState('');
+    const [mobile, setmobile] = useState('');
+  
+    const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-        window.location.href = '/Home';
+        try {
+            let { data } = await axios.post(`${server}/admin/new`, {
+                email, password, name, mobile
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+            toast.success("Logged In Successfully");
+            setIsAuthenticated(true);
+            window.location.href = '/admin/home';
+        } catch (err) {
+            toast.error(err.response.data.message);
+        }
     };
-
+    
 
     return (
         <div clas>
@@ -65,8 +78,8 @@ const AdminSignIn = () => {
                                 autoComplete="email"
                                 required
                                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                value={formData.email}
-                                onChange={handleChange}
+                                value={email}
+                                onChange={(e)=>{setEmail(e.target.value)}}
                             />
                         </div>
                         <div className="w">
@@ -80,25 +93,25 @@ const AdminSignIn = () => {
                                 autoComplete="name"
                                 required
                                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                value={formData.name}
-                                onChange={handleChange}
+                                value={name}
+                                onChange={(e)=>{setname(e.target.value)}}
                             />
                         </div>
                         <div className="flex space-x-4">
                             {/* Phone Number Input */}
                             <div className="w-full">
-                                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">
                                     Phone Number
                                 </label>
                                 <input
-                                    id="phoneNumber"
-                                    name="phoneNumber"
+                                    id="mobile"
+                                    name="mobile"
                                     type="tel"
                                     autoComplete="tel"
                                     required
                                     className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                    value={formData.phoneNumber}
-                                    onChange={handleChange}
+                                    value={mobile}
+                                    onChange={(e)=>{setmobile(e.target.value)}}
                                 />
                             </div>
                         </div>
@@ -114,8 +127,8 @@ const AdminSignIn = () => {
                                 autoComplete="current-password"
                                 required
                                 className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                                value={formData.password}
-                                onChange={handleChange}
+                                value={password}
+                                onChange={(e)=>{setpassword(e.target.value)}}
                             />
                         </div>
 

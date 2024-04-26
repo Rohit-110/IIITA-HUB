@@ -69,9 +69,6 @@ export default function Navbar() {
             }
         };
         
-        if(!isAuthenticated)return <Navigate to="/"/>
-  
-
     return (
         <header
             id="header"

@@ -1,43 +1,43 @@
-import React, { useState } from 'react';
-import { server } from '../index.js';
 import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Context, server } from '../index.js';
+
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email,setEmail]=useState('');
-  const [password,setpassword]=useState('');
-  const [confirmPassword,setconfirmPassword]=useState('');
-  const [name,setname]=useState('');
-  const [isAlumni,setisAlumni]=useState('');
-  const [mobile,setmobile]=useState('');
-  const [degree,setdegree]=useState('');
-  const [batchYear,setbatchYear]=useState('');
-  const [resumeLink,setresumeLink]=useState('');
+  const [email, setEmail] = useState('');
+  const [password, setpassword] = useState('');
+  const [confirmPassword, setconfirmPassword] = useState('');
+  const [name, setname] = useState('');
+  const [isAlumni, setisAlumni] = useState('');
+  const [mobile, setmobile] = useState('');
+  const [degree, setdegree] = useState('');
+  const [batchYear, setbatchYear] = useState('');
+  const [resumeLink, setresumeLink] = useState('');
 
-  let data={
-    "message":"Internal error"
-  }
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    try{
-      data= await axios.post(`${server}/student/new`,{
-        email,password,confirmPassword,name,isAlumni,mobile,degree,batchYear,resumeLink
-      },{
-        headers:{
-          "Content-Type":"application/json",
-        },
-        withCredentials:true,
-      });
-      toast.success("Logged In Successfully");
-      if(isAlumni==="true")window.location.href = '/alumHome';
-      else window.location.href = '/Home';
-    }catch(err){
-      toast.error(data.message);
-    }
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+          let { data } = await axios.post(`${server}/student/new`, {
+              email, password, confirmPassword, name, isAlumni, mobile, degree, batchYear, resumeLink
+          }, {
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              withCredentials: true,
+          });
+          toast.success("Logged In Successfully");
+          setIsAuthenticated(true);
+          if (isAlumni === "true") window.location.href = '/alumHome';
+          else window.location.href = '/home';
+      } catch (err) {
+          toast.error(err.response.data.message);
+      }
   };
+  
 
   return (
     <div >
