@@ -4,6 +4,12 @@ import noti from '../noti.png';
 import noti2 from '../noti2.png';
 import Notifications from './Notifications';
 import Dropdown from './Dropdown';
+import { server } from '../index';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { useContext } from 'react';
+import { Context } from '../index';
+import { Navigate } from 'react-router-dom';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -45,10 +51,26 @@ export default function Navbar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    const handleSignOut = () => {
-        window.location.href = '/';
-    };
+    const {isAuthenticated, setIsAuthenticated}= useContext(Context);
+    
+            const handleSignOut = async()=>{
+            console.log("Hello ");
+            try{
+                const {data} = await axios.get(`${server}/users/logout`,
+            {
+                withCredentials: true,
+            }
+            );
+            toast.success("You are logged out");
+            setIsAuthenticated(false);
+        }catch(error){
+                toast.error("Error");
+                setIsAuthenticated(true);
+            }
+        };
+        
+        if(!isAuthenticated)return <Navigate to="/"/>
+  
 
     return (
         <header

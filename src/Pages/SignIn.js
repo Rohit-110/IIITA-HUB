@@ -33,7 +33,7 @@ const SignIn = () => {
       });
       toast.success("Logged In Successfully");
       if(isAlumni==="true")window.location.href = '/alumHome';
-      window.location.href = '/Home';
+      else window.location.href = '/Home';
     }catch(err){
       toast.error(data.message);
     }
