@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useRef} from 'react';
 import img7 from '../images/img6.jpeg';
 import Navbar from '../Components/Navbar';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import emailjs from 'emailjs-com';
 import { Link } from 'react-router-dom';
 const profileData = {
     image: img7,
-    name: "Jai Khanna",
-    email: "iit2022005@iiita.ac.in",
-    phoneNumber: "8360708882",
+    name: "Aditi Gupta",
+    email: "iit2022011@iiita.ac.in",
+    phoneNumber: "8059334708",
     batch: "BTech IT '26",
     summary: "I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems.",
     resume: ""
@@ -20,6 +21,21 @@ const handleReferral = () => {
         refID.style.borderColor = "green";
 }
 const AditiProfile = () => {
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_7wlx7vj', 'template_wzuy5lh', form.current, 'UhsVpG8aJzI8gERVm')
+            .then((result) => {
+                console.log('Email sent successfully:', result.text);
+                alert('Mail has been sent!');
+                form.current.reset();
+            }, (error) => {
+                console.error('Email sending failed:', error.text);
+                alert('Oops! Something went wrong. Please try again later.');
+            });
+    };
     useEffect(() => {
         AOS.init({ duration: 1500 })
     })
@@ -35,9 +51,11 @@ const AditiProfile = () => {
                                     <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <h5 className="my-3">{profileData.name}</h5>
                                     <p className="text-muted mb-4">{profileData.summary}</p>
-                                    <button id="ref" onClick={handleReferral} className="border-2 text-white border-blue-500 border-solid rounded bg-blue-500 p-2 hover:bg-blue-600">
-                                       Ask for Referral
-                                    </button>
+                                    <form ref={form} onSubmit={sendEmail}>
+                                        <input type="hidden" name="to_name" value={profileData.name} />
+                                        <input type="hidden" name="user_email" value={profileData.email} />
+                                        <button id="ref" type="submit" className="border-2 text-white border-blue-500 border-solid rounded bg-blue-500 p-2 hover:bg-blue-600">Ask for Referral</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import img7 from '../images/img7.jpeg';
 import Navbar from '../Components/Navbar';
 import AOS from 'aos';
+import emailjs from 'emailjs-com';
 import 'aos/dist/aos.css';
 import { Link } from 'react-router-dom';
 const profileData = {
@@ -15,11 +16,26 @@ const profileData = {
 };
 const handleReferral = () => {
     const refID = document.getElementById('ref');
-        refID.innerText = "Mail sent succesfully!";
-        refID.style.backgroundColor = "green";
-        refID.style.borderColor = "green";
+    refID.innerText = "Mail sent succesfully!";
+    refID.style.backgroundColor = "green";
+    refID.style.borderColor = "green";
 }
 const JaiProfile = () => {
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_7wlx7vj', 'template_wzuy5lh', form.current, 'UhsVpG8aJzI8gERVm')
+            .then((result) => {
+                console.log('Email sent successfully:', result.text);
+                alert('Mail has been sent!');
+                form.current.reset();
+            }, (error) => {
+                console.error('Email sending failed:', error.text);
+                alert('Oops! Something went wrong. Please try again later.');
+            });
+    };
     useEffect(() => {
         AOS.init({ duration: 1500 })
     })
@@ -35,9 +51,12 @@ const JaiProfile = () => {
                                     <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <h5 className="my-3">{profileData.name}</h5>
                                     <p className="text-muted mb-4">{profileData.summary}</p>
-                                    <button id="ref" onClick={handleReferral} className="border-2 text-white border-blue-500 border-solid rounded bg-blue-500 p-2 hover:bg-blue-600">
-                                       Ask for Referral
-                                    </button>
+                                    <form ref={form} onSubmit={sendEmail}>
+                                        <input type="hidden" name="to_name" value={profileData.name} />
+                                        <input type="hidden" name="user_email" value={profileData.email} />
+                                        <button id="ref" type="submit" className="border-2 text-white border-blue-500 border-solid rounded bg-blue-500 p-2 hover:bg-blue-600">Ask for Referral</button>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
