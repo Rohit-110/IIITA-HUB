@@ -1,29 +1,36 @@
-import React, { useEffect } from 'react';
-import img7 from '../images/img7.jpeg';
+import React, { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link, useParams} from 'react-router-dom';
+import {server} from '..';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 import AlumNavbar from '../Components/AlumNavbar';
-const profileData = {"Jai Khanna":{
-    image: img7,
-    name: "Jai Khanna",
-    email: "iit2022005@iiita.ac.in",
-    phoneNumber: "8360708882",
-    batch: "BTech IT '26",
-    summary: "I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems.",
-    resume: ""
-}};
 
 const AlumProfile = () => {
     useEffect(() => {
         AOS.init({ duration: 1500 })
-    })
+    }, []);
 
     const { name } = useParams();
-    const profile = profileData[name];
+    const [profile, setProfile] = useState(null);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await axios.get(`${server}/student/profile/${name}`);
+                setProfile(response.data);
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+        };
+
+        fetchProfile();
+    }, [name]);
+
     if (!profile) {
-        return <div>Profile not found</div>; 
+        return <div>Loading...</div>;
     }
+
     return (
         <div>
             <AlumNavbar />
@@ -33,9 +40,9 @@ const AlumProfile = () => {
                         <div data-aos="fade-right" className="p-3 col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
-                                    <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
-                                    <h5 className="my-3">{profileData.name}</h5>
-                                    <p className="text-muted mb-4">{profileData.summary}</p>
+                                    <img src={profile.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
+                                    <h5 className="my-3">{profile.name}</h5>
+                                    <p className="text-muted mb-4">{profile.summary}</p>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +55,7 @@ const AlumProfile = () => {
                                             <p className="mb-0">Full Name</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.name}</p>
+                                            <p className="text-muted mb-0">{profile.name}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -57,7 +64,7 @@ const AlumProfile = () => {
                                             <p className="mb-0">Email</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.email}</p>
+                                            <p className="text-muted mb-0">{profile.email}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -66,7 +73,7 @@ const AlumProfile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.phoneNumber}</p>
+                                            <p className="text-muted mb-0">{profile.phoneNumber}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -75,22 +82,21 @@ const AlumProfile = () => {
                                             <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.batch}</p>
+                                            <p className="text-muted mb-0">{profile.batch}</p>
                                         </div>
-                                    </div><hr />
+                                    </div>
+                                    <hr />
                                     <div className="row p-1.5">
                                         <div className="col-sm-3">
                                             <p className="mb-0">Resume</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <Link to={profileData.resume}><p className="text-muted mb-0">Link</p></Link>
+                                            <Link to={profile.resume}><p className="text-muted mb-0">Link</p></Link>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </section>
