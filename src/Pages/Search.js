@@ -6,7 +6,7 @@ import Scroll from '../Components/Scroll';
 import Card from '../Components/Card';
 
 export default function Home() {
-  const [names, setNames] = useState([]);
+  const [alumni, setAlumni] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function Home() {
       try {
         const response = await axios.get('/api/alumni');
         if (Array.isArray(response.data)) {
-          setNames(response.data.map(alumni => alumni.name));
+          setAlumni(response.data);
         } else {
           console.error('Unexpected response format:', response.data);
         }
@@ -26,8 +26,8 @@ export default function Home() {
     fetchAlumni();
   }, []);
 
-  const filteredNames = names.filter(name =>
-    name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredAlumni = alumni.filter(alumni =>
+    alumni.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSearchChange = (e) => {
@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div className='bg-dark'>
       <Scroll />
-      <Navbar />
+      <Navbar /> 
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-8">
@@ -64,11 +64,11 @@ export default function Home() {
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-md-12">
-            <div className="bg-white p-2 rounded-lg mb-6 overflow-hidden justify-center items-center ">
+            <div className="bg-white p-2 rounded-lg mb-6 overflow-hidden justify-center items-center">
               <h3 className="mt-2 text-2xl font-bold mb-4 text-gray-800">Alumni</h3>
               <div className="flex flex-wrap justify-center items-center gap-3">
-                {filteredNames.map((name, index) => (
-                  <Card key={index} name={name} />
+                {filteredAlumni.map((alumni, index) => (
+                  <Card key={index} data={alumni} />
                 ))}
               </div>
             </div>
