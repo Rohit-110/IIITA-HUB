@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 const Card = ({ data }) => {
-  const profilePath = `/profile/${data.email}`;
+  const profilePath = `/profile/${data._id}`;
   return (
     <Link to={profilePath}>
       <div className="cursor-pointer card bg-white rounded-lg shadow-md mx-2" style={{ width: "150px", flex: "0 0 auto" }}>
