@@ -83,7 +83,7 @@ const ExploreProfile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profile.phoneNumber}</p>
+                                            <p className="text-muted mb-0">{profile.mobile}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -92,7 +92,7 @@ const ExploreProfile = () => {
                                             <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profile.batch}</p>
+                                            <p className="text-muted mb-0">{profile.batchYear}</p>
                                         </div>
                                     </div><hr />
                                     <div className="row p-1.5">
