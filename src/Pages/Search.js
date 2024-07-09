@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     const fetchAlumni = async () => {
       try {
-        const response = await axios.get('/api/alumni');
+        const response = await axios.get('/api/v1/student/alumni');
         if (Array.isArray(response.data)) {
           setAlumni(response.data);
         } else {
