@@ -44,8 +44,7 @@ function App() {
           <Route path="/alumHome" element={<AlumHome />}/>
           <Route path="/alumContact" element={<AlumContact/>}/>
           <Route path="/alumProfile" element={<AlumProfile/>}/>
-          <Route path="/alumProfile/:id" element={<AlumProfile />} />
-          <Route path="/exploreProfile" element={<ExploreProfile/>}/>
+          <Route path="/alumProfile/:id" element={<ExploreProfile />} />
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/search" element={<Search/>}/>
           <Route path="/companies" element={<Recruiters/>}/>
