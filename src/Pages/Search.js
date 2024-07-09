@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { server } from '..';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Scroll from '../Components/Scroll';
@@ -12,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const fetchAlumni = async () => {
       try {
-        const response = await axios.get('/api/v1/student/alumni');
+        const response = await axios.get('${server}/student/alumni');
           setAlumni(response.data);
           console.error('Unexpected response format:', response.data);
       } catch (err) {
