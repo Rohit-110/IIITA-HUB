@@ -21,10 +21,6 @@ import AdminHome from './Pages/adminHome';
 import { Toaster } from 'react-hot-toast';
 import Login from './Pages/Login';
 import AdminLogin from './Pages/adminLogin';
-import JaiProfile from './Pages/jaiProfile';
-import RohitProfile from './Pages/rohitProfile';
-import AditiProfile from './Pages/aditiProfile';
-import NituProfile from './Pages/nituProfile';
 
 function App() {
   return (
