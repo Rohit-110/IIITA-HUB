@@ -21,7 +21,7 @@ export default function Home() {
 
     fetchAlumni();
   }, []);
-  
+
   const filteredNames = names.filter(name =>
     name.toLowerCase().includes(searchQuery.toLowerCase())
   );
