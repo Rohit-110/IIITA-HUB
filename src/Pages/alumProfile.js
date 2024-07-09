@@ -43,7 +43,7 @@ const AlumProfile = () => {
                                 <div className="card-body text-center d-flex flex-column align-items-center">
                                     <img src={profile.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <h5 className="my-3">{profile.name}</h5>
-                                    <p className="text-muted mb-4">{profile.summary}</p>
+                                    <p className="text-muted mb-4">Passionate software engineer dedicated to web development, problem-solving, and continuous learning of cutting-edge technologies for impactful solutions.</p>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ const AlumProfile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profile.phoneNumber}</p>
+                                            <p className="text-muted mb-0">{profile.mobile}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -83,7 +83,7 @@ const AlumProfile = () => {
                                             <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profile.batch}</p>
+                                            <p className="text-muted mb-0">{profile.batchYear}</p>
                                         </div>
                                     </div>
                                     <hr />
