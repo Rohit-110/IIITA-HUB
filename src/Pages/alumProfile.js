@@ -18,7 +18,6 @@ const AlumProfile = () => {
         const fetchProfile = async () => {
             try {
                 const response = await axios.get(`${server}/student/profile/${id}`);
-                console.log('Profile data:', response.data);
                 setProfile(response.data);
             } catch (error) {
                 console.error('Error fetching profile data:', error);
