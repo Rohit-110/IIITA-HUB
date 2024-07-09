@@ -49,7 +49,7 @@ const ExploreProfile = () => {
                                 <div className="card-body text-center d-flex flex-column align-items-center">
                                     <img src={profile.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
                                     <h5 className="my-3">{profile.name}</h5>
-                                    <p className="text-muted mb-4">{profile.summary}</p>
+                                    <p className="text-muted mb-4">I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems.</p>
                                     <button id="ref" onClick={handleReferral} className="border-2 text-white border-blue-500 border-solid rounded bg-blue-500 p-2 hover:bg-blue-600">
                                         Ask for Referral
                                     </button>
