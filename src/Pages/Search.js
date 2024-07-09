@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import Scroll from '../Components/Scroll';
 import Card from '../Components/Card';
 
 export default function Home() {
-  const names = ["Jai Khanna", "Rohit Pandey", "Nitu Sherawat", "Aditi Gupta"];
+  const [names, setNames] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(()=>{
+    const fetchAlumni = async ()=>{
+      try{
+        const response = await axios.get('/alumni');
+        setNames(response.data.map(alumni => alumni.name));
+      }
+      catch(err){
+        console.error('Error fetching alumni : ', err);
+    }
+  };
   
   const filteredNames = names.filter(name =>
     name.toLowerCase().includes(searchQuery.toLowerCase())
