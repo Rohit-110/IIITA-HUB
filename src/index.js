@@ -4,7 +4,6 @@ import './css/index.css';
 import App from './App';
 import { useState } from 'react';
 import { createContext } from 'react';
-import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export const server="https://iiita-hub-backend-l7tm.onrender.com/api/v1";
@@ -35,5 +34,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Appwrapper />
   </React.StrictMode>
 );
-
-reportWebVitals();

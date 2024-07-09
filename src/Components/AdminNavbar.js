@@ -34,7 +34,7 @@ export default function AdminNavbar() {
             );
             toast.success("You are logged out");
             setIsAuthenticated(false);
-            window.location.href = '/signin';
+            window.location.href = '/';
         }catch(error){
                 toast.error("Error");
                 setIsAuthenticated(true);

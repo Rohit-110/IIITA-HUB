@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import img7 from '../images/img7.jpeg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link} from 'react-router-dom';
 import AdminNavbar from '../Components/AdminNavbar';
 import axios from 'axios';
 import { server } from '../index';

@@ -10,6 +10,7 @@ import { server } from '..';
 import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import { Context } from '..';
+
 const profileData = {
     image: img7,
     name: "Jai Khanna",
