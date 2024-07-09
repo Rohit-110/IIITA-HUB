@@ -16,22 +16,23 @@ const AdminNoti = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-          let { data } = await axios.post(`${server}/admin/noitfication`, {
-              title, description, isread
-          }, {
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              withCredentials: true,
-          });
-          toast.success("Notification sent");
-          setIsAuthenticated(true);
-      } catch (err) {
-          toast.error(err.response.data.message);
-      }
-  };
+    e.preventDefault();
+    try {
+        let { data } = await axios.post(`${server}/admin/notification`, {
+            title, description, isread
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+        toast.success("Notification Sent");
+        setIsAuthenticated(true);
+    } catch (err) {
+        toast.error("Error");
+    }
+};
+
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-8 bg-dark">
@@ -40,7 +41,7 @@ const AdminNoti = () => {
       <div className="mt-20 ml-4 mb-4 text-white">
         <h1 className="text-3xl font-bold mb-8">Send notification</h1>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+          <div className="mb-4 w-96 ml-96">
             <label htmlFor="title" className="block text-white text-xl font-medium mb-2">Title</label>
             <input
               id="title"
@@ -52,7 +53,7 @@ const AdminNoti = () => {
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 w-96 ml-96">
             <label htmlFor="content" className="block text-white text-xl font-medium mb-1">Content</label>
             <textarea
               id="content"
@@ -63,7 +64,7 @@ const AdminNoti = () => {
               required
             ></textarea>
           </div>
-          <div>
+          <div className='mr-10'>
             <button
               type="submit"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
