@@ -9,16 +9,18 @@ export default function Home() {
   const [names, setNames] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(()=>{
-    const fetchAlumni = async ()=>{
-      try{
-        const response = await axios.get('/alumni');
+  useEffect(() => {
+    const fetchAlumni = async () => {
+      try {
+        const response = await axios.get('/api/alumni');
         setNames(response.data.map(alumni => alumni.name));
+      } catch (err) {
+        console.error('Error fetching alumni:', err);
       }
-      catch(err){
-        console.error('Error fetching alumni : ', err);
-    }
-  };
+    };
+
+    fetchAlumni();
+  }, []);
   
   const filteredNames = names.filter(name =>
     name.toLowerCase().includes(searchQuery.toLowerCase())
