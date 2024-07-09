@@ -13,11 +13,8 @@ export default function Home() {
     const fetchAlumni = async () => {
       try {
         const response = await axios.get('/api/v1/student/alumni');
-        if (Array.isArray(response.data)) {
           setAlumni(response.data);
-        } else {
           console.error('Unexpected response format:', response.data);
-        }
       } catch (err) {
         console.error('Error fetching alumni:', err);
       }
