@@ -11,13 +11,13 @@ const AlumProfile = () => {
         AOS.init({ duration: 1500 })
     }, []);
 
-    const { name } = useParams();
+    const { id } = useParams();
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await axios.get(`${server}/student/profile/${name}`);
+                const response = await axios.get(`${server}/student/profile/${id}`);
                 setProfile(response.data);
             } catch (error) {
                 console.error('Error fetching profile data:', error);
@@ -25,7 +25,7 @@ const AlumProfile = () => {
         };
 
         fetchProfile();
-    }, [name]);
+    }, [id]);
 
     if (!profile) {
         return <div>Loading...</div>;
