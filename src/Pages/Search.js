@@ -15,7 +15,6 @@ export default function Home() {
       try {
         const response = await axios.get('${server}/student/alumni');
           setAlumni(response.data);
-          console.error('Unexpected response format:', response.data);
       } catch (err) {
         console.error('Error fetching alumni:', err);
       }
