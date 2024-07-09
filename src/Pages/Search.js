@@ -13,7 +13,11 @@ export default function Home() {
     const fetchAlumni = async () => {
       try {
         const response = await axios.get('/api/alumni');
-        setNames(response.data.map(alumni => alumni.name));
+        if (Array.isArray(response.data)) {
+          setNames(response.data.map(alumni => alumni.name));
+        } else {
+          console.error('Unexpected response format:', response.data);
+        }
       } catch (err) {
         console.error('Error fetching alumni:', err);
       }
@@ -33,22 +37,22 @@ export default function Home() {
   return (
     <div className='bg-dark'>
       <Scroll />
-      <Navbar /> 
+      <Navbar />
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-8">
             <div className="mt-28 input-group">
-              <input 
-                type="text" 
-                className="form-control rounded-start" 
-                placeholder="Search..." 
+              <input
+                type="text"
+                className="form-control rounded-start"
+                placeholder="Search..."
                 style={{ borderTopRightRadius: '0', borderBottomRightRadius: '0' }}
                 value={searchQuery}
                 onChange={handleSearchChange}
               />
-              <button 
-                className="btn btn-outline-secondary rounded-end" 
-                type="button" 
+              <button
+                className="btn btn-outline-secondary rounded-end"
+                type="button"
                 style={{ borderTopLeftRadius: '0', borderBottomLeftRadius: '0' }}
               >
                 Search
