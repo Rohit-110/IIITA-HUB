@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const fetchAlumni = async () => {
       try {
-        const response = await axios.get('${server}/student/alumni');
+        const response = await axios.get(`${server}/student/alumni`);
           setAlumni(response.data);
       } catch (err) {
         console.error('Error fetching alumni:', err);
