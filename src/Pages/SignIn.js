@@ -16,7 +16,6 @@ const SignIn = () => {
   const [degree, setdegree] = useState('');
   const [batchYear, setbatchYear] = useState('');
   const [resumeLink, setresumeLink] = useState('');
-  const [photo, setphoto] = useState('');
 
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
   const { checkemail, setCheckemail } = useContext(Context);
@@ -211,21 +210,6 @@ const SignIn = () => {
                   />
                 </div>
               </div>
-            </div>
-            <div className="w-full">
-              <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">
-                Photo
-              </label>
-              <input
-                id="photo"
-                name="photo"
-                type="tel"
-                autoComplete="tel"
-                required
-                className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                value={photo}
-                onChange={(e) => { setphoto(e.target.value) }}
-              />
             </div>
             <div>
               <label htmlFor="resumeLink" className="block text-sm font-medium text-gray-700">
