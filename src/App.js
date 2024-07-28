@@ -21,10 +21,6 @@ import AdminHome from './Pages/adminHome';
 import { Toaster } from 'react-hot-toast';
 import Login from './Pages/Login';
 import AdminLogin from './Pages/adminLogin';
-import JaiProfile from './Pages/jaiProfile';
-import RohitProfile from './Pages/rohitProfile';
-import AditiProfile from './Pages/aditiProfile';
-import NituProfile from './Pages/nituProfile';
 
 function App() {
   return (
@@ -44,11 +40,7 @@ function App() {
           <Route path="/alumHome" element={<AlumHome />}/>
           <Route path="/alumContact" element={<AlumContact/>}/>
           <Route path="/alumProfile" element={<AlumProfile/>}/>
-          <Route path="/profile/Jai Khanna" element={<JaiProfile/>}/>
-          <Route path="/profile/Rohit Pandey" element={<RohitProfile/>}/>
-          <Route path="/profile/Aditi Gupta" element={<AditiProfile/>}/>
-          <Route path="/profile/Nitu Sherawat" element={<NituProfile/>}/>
-          <Route path="/exploreProfile" element={<ExploreProfile/>}/>
+          <Route path="/alumProfile/:id" element={<ExploreProfile />} />
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/search" element={<Search/>}/>
           <Route path="/companies" element={<Recruiters/>}/>

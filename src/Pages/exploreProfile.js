@@ -1,28 +1,43 @@
-import React, { useEffect } from 'react';
-import img7 from '../images/img7.jpeg';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Link } from 'react-router-dom';
-const profileData = {
-    image: img7,
-    name: "Jai Khanna",
-    email: "iit2022005@iiita.ac.in",
-    phoneNumber: "8360708882",
-    batch: "BTech IT '26",
-    summary: "I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems.",
-    resume: ""
-};
-const handleReferral = () => {
-    const refID = document.getElementById('ref');
-        refID.innerText = "Mail sent succesfully!";
-        refID.style.backgroundColor = "green";
-        refID.style.borderColor = "green";
-}
+import { server } from '..';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+
 const ExploreProfile = () => {
     useEffect(() => {
         AOS.init({ duration: 1500 })
-    })
+    }, []);
+
+    const { id } = useParams();
+    const [profile, setProfile] = useState(null);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await axios.get(`${server}/student/profile/${id}`);
+                setProfile(response.data);
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+        };
+
+        fetchProfile();
+    }, [id]);
+
+    if (!profile) {
+        return <div>Loading...</div>;
+    }
+
+    const handleReferral = () => {
+        const refID = document.getElementById('ref');
+        refID.innerText = "Mail sent successfully!";
+        refID.style.backgroundColor = "green";
+        refID.style.borderColor = "green";
+    }
+
     return (
         <div>
             <Navbar />
@@ -32,11 +47,11 @@ const ExploreProfile = () => {
                         <div data-aos="fade-right" className="p-3 col-lg-4">
                             <div className="card mb-4">
                                 <div className="card-body text-center d-flex flex-column align-items-center">
-                                    <img src={profileData.image} alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
-                                    <h5 className="my-3">{profileData.name}</h5>
-                                    <p className="text-muted mb-4">{profileData.summary}</p>
+                                    <img src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="avatar" className="rounded-circle" style={{ width: "150px" }} />
+                                    <h5 className="my-3">{profile.name}</h5>
+                                    <p className="text-muted mb-4">I am a passionate software engineer with experience in web development. I enjoy learning new technologies and solving complex problems.</p>
                                     <button id="ref" onClick={handleReferral} className="border-2 text-white border-blue-500 border-solid rounded bg-blue-500 p-2 hover:bg-blue-600">
-                                       Ask for Referral
+                                        Ask for Referral
                                     </button>
                                 </div>
                             </div>
@@ -50,7 +65,7 @@ const ExploreProfile = () => {
                                             <p className="mb-0">Full Name</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.name}</p>
+                                            <p className="text-muted mb-0">{profile.name}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -59,7 +74,7 @@ const ExploreProfile = () => {
                                             <p className="mb-0">Email</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.email}</p>
+                                            <p className="text-muted mb-0">{profile.email}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -68,7 +83,7 @@ const ExploreProfile = () => {
                                             <p className="mb-0">Phone</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.phoneNumber}</p>
+                                            <p className="text-muted mb-0">{profile.mobile}</p>
                                         </div>
                                     </div>
                                     <hr />
@@ -77,7 +92,7 @@ const ExploreProfile = () => {
                                             <p className="mb-1">Batch</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <p className="text-muted mb-0">{profileData.batch}</p>
+                                            <p className="text-muted mb-0">{profile.batchYear}</p>
                                         </div>
                                     </div><hr />
                                     <div className="row p-1.5">
@@ -85,7 +100,7 @@ const ExploreProfile = () => {
                                             <p className="mb-0">Resume</p>
                                         </div>
                                         <div className="col-sm-9">
-                                            <Link to={profileData.resume}><p className="text-muted mb-0">Link</p></Link>
+                                            <Link to={profile.resume}><p className="text-muted mb-0">Link</p></Link>
                                         </div>
                                     </div>
                                 </div>
